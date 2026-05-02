@@ -22,6 +22,12 @@
             --border-color: #e2e8f0;
             --timeline-line: #e2e8f0;
             --nav-bg: rgba(255,255,255,0.9);
+            --contact-bg: #0f172a;
+            --contact-text: #ffffff;
+            --contact-subtext: #94a3b8;
+            --contact-item-bg: rgba(255,255,255,0.05);
+            --contact-item-hover: rgba(255,255,255,0.1);
+            --contact-item-border: transparent;
         }
 
         [data-theme="dark"] {
@@ -39,6 +45,12 @@
             --border-color: #334155;
             --timeline-line: #334155;
             --nav-bg: rgba(15, 23, 42, 0.95);
+            --contact-bg: #020617;
+            --contact-text: #f8fafc;
+            --contact-subtext: #94a3b8;
+            --contact-item-bg: rgba(255,255,255,0.03);
+            --contact-item-hover: rgba(255,255,255,0.08);
+            --contact-item-border: #1e293b;
         }
 
         * {
@@ -641,27 +653,31 @@
             color: var(--primary);
         }
 
-        /* Contact Section */
+        /* Contact Section - FIXED */
         .contact {
-            background: var(--secondary);
-            color: white;
+            background: var(--contact-bg);
+            color: var(--contact-text);
             text-align: center;
             border-radius: 30px;
             margin: 4rem auto;
             padding: 4rem 2rem;
             max-width: 1200px;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, color 0.3s;
+            border: 1px solid var(--contact-item-border);
         }
 
         .contact h2 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
+            color: var(--contact-text);
+            transition: color 0.3s;
         }
 
         .contact > p {
-            color: #94a3b8;
+            color: var(--contact-subtext);
             margin-bottom: 2rem;
             font-size: 1.1rem;
+            transition: color 0.3s;
         }
 
         .contact-grid {
@@ -672,19 +688,19 @@
         }
 
         .contact-item {
-            background: rgba(255,255,255,0.05);
+            background: var(--contact-item-bg);
             padding: 1.5rem;
             border-radius: 15px;
             transition: all 0.3s;
             text-decoration: none;
-            color: white;
-            border: 1px solid transparent;
+            color: var(--contact-text);
+            border: 1px solid var(--contact-item-border);
         }
 
         .contact-item:hover {
-            background: rgba(255,255,255,0.1);
+            background: var(--contact-item-hover);
             transform: translateY(-5px);
-            border-color: rgba(255,255,255,0.2);
+            border-color: var(--primary);
         }
 
         .contact-item i {
@@ -696,10 +712,11 @@
         .contact-item h3 {
             font-size: 1.1rem;
             margin-bottom: 0.5rem;
+            color: var(--contact-text);
         }
 
         .contact-item span {
-            color: #94a3b8;
+            color: var(--contact-subtext);
             font-size: 0.9rem;
         }
 
@@ -790,33 +807,13 @@
                 justify-content: center;
             }
         }
-
-        /* Theme transition overlay */
-        .theme-transition {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg);
-            z-index: 9999;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .theme-transition.active {
-            opacity: 1;
-        }
     </style>
 </head>
 <body>
 
-    <div class="theme-transition" id="themeTransition"></div>
-
     <!-- Navigation -->
     <nav id="navbar">
-        <div class="logo">Mostapha M'bairik</div>
+        <div class="logo">Mostapha Data Analyst</div>
         <div class="nav-center">
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home" data-i18n="nav_home">Accueil</a></li>
@@ -871,7 +868,7 @@
             </div>
             <div class="hero-image">
                 <div class="profile-container">
-                    <img src="photo.png" alt="Mostapha M'bairik" class="profile-img" id="profileImg" onerror="this.src='https://via.placeholder.com/350x350/667eea/ffffff?text=MM'">
+                    <img src="photo.jpg" alt="Mostapha M'bairik" class="profile-img" id="profileImg" onerror="this.src='https://via.placeholder.com/350x350/667eea/ffffff?text=MM'">
                 </div>
             </div>
         </div>
@@ -894,7 +891,7 @@
                 <div class="skill-card">
                     <div class="skill-icon"><i class="fas fa-database"></i></div>
                     <h4>SQL & <span data-i18n="skill_db">Bases de données</span></h4>
-                    <p>SQL Server, PostgreSQL, <span data-i18n="skill_db_desc">modélisation relationnelle, ETL/ELT</span></p>
+                    <p>SQL Server, PostgreSQL, <span data-i18n="skill_db_desc">modélisation relationnelle, ETL</span></p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon"><i class="fab fa-python"></i></div>
@@ -1202,8 +1199,7 @@
         function toggleTheme() {
             const html = document.documentElement;
             const icon = document.getElementById('themeIcon');
-            const btn = document.getElementById('themeToggle');
-            
+
             if (currentTheme === 'light') {
                 html.setAttribute('data-theme', 'dark');
                 icon.classList.remove('fa-moon');
@@ -1224,8 +1220,7 @@
             const btn = document.getElementById('langToggle');
             currentLang = currentLang === 'fr' ? 'en' : 'fr';
             btn.textContent = currentLang === 'fr' ? 'EN' : 'FR';
-            
-            // Update all elements with data-i18n
+
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (translations[currentLang][key]) {
@@ -1237,9 +1232,7 @@
                 }
             });
 
-            // Restart typing effect
             restartTyping();
-            
             localStorage.setItem('lang', currentLang);
         }
 
@@ -1248,7 +1241,7 @@
         function typeWriter(text, element) {
             let i = 0;
             clearInterval(typingInterval);
-            
+
             function type() {
                 if (i < text.length) {
                     element.innerHTML = text.substring(0, i+1) + '<span style="animation: blink 1s infinite;">|</span>';
@@ -1258,7 +1251,7 @@
                     clearInterval(typingInterval);
                 }
             }
-            
+
             typingInterval = setInterval(type, 100);
         }
 
@@ -1273,11 +1266,11 @@
         function loadPreferences() {
             const savedTheme = localStorage.getItem('theme');
             const savedLang = localStorage.getItem('lang');
-            
+
             if (savedTheme === 'dark') {
                 toggleTheme();
             }
-            
+
             if (savedLang === 'en') {
                 toggleLang();
             }
@@ -1300,7 +1293,6 @@
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    // Close mobile menu if open
                     document.getElementById('navLinks').classList.remove('active');
                 }
             });
@@ -1342,7 +1334,6 @@
             });
         };
 
-        // Trigger counters when hero is visible
         const heroObserver = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
                 animateCounters();
