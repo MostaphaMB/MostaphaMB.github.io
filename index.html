@@ -855,9 +855,6 @@
                     <a href="#contact" class="btn btn-secondary">
                         <i class="fas fa-envelope"></i> <span data-i18n="btn_contact">Me contacter</span>
                     </a>
-                    <a href="CV_Mostapha-Mbairik_Data Analyst.pdf" target="_blank" class="btn btn-secondary" download>
-                        <i class="fas fa-file-pdf"></i> <span data-i18n="btn_cv">Télécharger mon CV</span>
-                    </a>
                 </div>
                 <div class="stats">
                     <div class="stat-item">
@@ -941,7 +938,7 @@
                         <span class="tag">Data Viz</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/MostaphaMB/SALES-CUSTOMER-ANALYTICS--USING-TABLAUX" target="_blank"><i class="fas fa-external-link-alt"></i> <span data-i18n="btn_view">Voir le projet</span></a>
+                        <a href="https://github.com/MostaphaMB/SALES-CUSTOMER-ANALYTICS--USING-TABLAUX"><i class="fas fa-external-link-alt"></i> <span data-i18n="btn_view">Voir le projet</span></a>
                         </div>
                 </div>
             </div>
@@ -961,7 +958,7 @@
                         <span class="tag">XGBoost</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/MostaphaMB" target="_blank"><i class="fas fa-external-link-alt"></i> <span data-i18n="btn_view">Voir le projet</span></a>
+                        <a href="https://github.com/MostaphaMB"><i class="fas fa-external-link-alt"></i> <span data-i18n="btn_view">Voir le projet</span></a>
                         </div>
                 </div>
             </div>
@@ -981,7 +978,7 @@
                         <span class="tag">Finance</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/MostaphaMB" target="_blank"><i class="fas fa-external-link-alt"></i> <span data-i18n="btn_view">Voir le projet</span></a>
+                        <a href="https://github.com/MostaphaMB"><i class="fas fa-external-link-alt"></i> <span data-i18n="btn_view">Voir le projet</span></a>
                         </div>
                 </div>
             </div>
@@ -1007,7 +1004,7 @@
                         <span class="tag">ETL/ELT</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/MostaphaMB" target="_blank"><i class="fas fa-external-link-alt"></i> <span data-i18n="btn_view">Voir le projet</span></a>
+                        <a href="https://github.com/MostaphaMB"><i class="fas fa-external-link-alt"></i> <span data-i18n="btn_view">Voir le projet</span></a>
                         </div>
                 </div>
             </div>
@@ -1089,11 +1086,6 @@
                 <h3 data-i18n="contact_phone">Téléphone</h3>
                 <span>+212 6 62 49 34 50</span>
             </a>
-            <a href="CV_Mostapha-Mbairik_Data Analyst.pdf" target="_blank" class="contact-item" download>
-                <i class="fas fa-file-pdf"></i>
-                <h3 data-i18n="contact_cv">Mon CV</h3>
-                <span data-i18n="contact_cv_desc">Télécharger le PDF</span>
-            </a>
         </div>
     </section>
 
@@ -1147,7 +1139,6 @@
                 proj4_desc: "Vous pouvez consulter mon GitHub pour voir tous les projets que j'ai réalisés",
                 btn_view: "Voir le projet",
                 btn_code: "Code source",
-                btn_cv: "Télécharger mon CV",
                 exp_title: "Expérience Professionnelle",
                 exp_subtitle: "Mon parcours en analyse de données et gestion de projets digitaux",
                 job1_title: "Chargé de Projet Digital & Data",
@@ -1166,8 +1157,6 @@
                 contact_title: "Travaillons Ensemble",
                 contact_desc: "Vous avez un projet data ? Discutons de la façon dont je peux vous aider à transformer vos données en succès.",
                 contact_phone: "Téléphone",
-                contact_cv: "Mon CV",
-                contact_cv_desc: "Télécharger le PDF",
                 footer: "Data Analyst Portfolio. Conçu avec",
                 footer2: "et beaucoup de données."
             },
@@ -1216,7 +1205,6 @@
 
                 btn_view: "View project",
                 btn_code: "Source code",
-                btn_cv: "Download my CV",
                 exp_title: "Professional Experience",
                 exp_subtitle: "My journey in data analysis and digital project management",
                 job1_title: "Digital & Data Project Manager",
@@ -1235,8 +1223,6 @@
                 contact_title: "Let's Work Together",
                 contact_desc: "Do you have a data project? Let's discuss how I can help you turn your data into success.",
                 contact_phone: "Phone",
-                contact_cv: "My CV",
-                contact_cv_desc: "Download PDF",
                 footer: "Data Analyst Portfolio. Built with",
                 footer2: "and lots of data."
             }
@@ -1282,6 +1268,17 @@
                 }
             });
 
+            // Switch CV links based on language
+            const heroCvLink = document.getElementById('heroCvLink');
+            const contactCvLink = document.getElementById('contactCvLink');
+            if (currentLang === 'en') {
+                heroCvLink.href = 'CV_EN_Mostapha_MBairik_DataAnalyst_.pdf';
+                contactCvLink.href = 'CV_EN_Mostapha_MBairik_DataAnalyst_.pdf';
+            } else {
+                heroCvLink.href = 'CV_Mostapha-Mbairik_Data Analyst.pdf';
+                contactCvLink.href = 'CV_Mostapha-Mbairik_Data Analyst.pdf';
+            }
+
             restartTyping();
             localStorage.setItem('lang', currentLang);
         }
@@ -1322,6 +1319,11 @@
             }
 
             if (savedLang === 'en') {
+                // Set English CV links before toggling language
+                const heroCvLink = document.getElementById('heroCvLink');
+                const contactCvLink = document.getElementById('contactCvLink');
+                if (heroCvLink) heroCvLink.href = 'CV_EN_Mostapha_MBairik_DataAnalyst_.pdf';
+                if (contactCvLink) contactCvLink.href = 'CV_EN_Mostapha_MBairik_DataAnalyst_.pdf';
                 toggleLang();
             }
         }
